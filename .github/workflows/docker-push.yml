@@ -55,10 +55,15 @@ jobs:
           # Pull the latest Docker image from Docker Hub
           docker pull prashanthdussa/hello-world-node-app:latest
           
-          # Stop and remove any existing container
-          docker stop hello-world-node-app || true
-          docker rm hello-world-node-app || true
+          # Check if the container exists and stop/remove it if it does
+          if [ "$(docker ps -aq -f name=hello-world-node-app)" ]; then
+            docker stop hello-world-node-app
+            docker rm hello-world-node-app
+          fi
           
           # Run the new container
-          docker run -d --name hello-world-node -p 3000:3000 prashanthdussa/hello-world-node-app:latest
+          docker run -d --name hello-world-node-app -p 3000:3000 prashanthdussa/hello-world-node-app:latest
         EOF
+
+    - name: Clean up SSH key
+      run: rm -f ec2_key.pem
