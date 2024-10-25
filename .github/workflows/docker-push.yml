@@ -24,8 +24,8 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t yourusername/hello-world-node:latest .
-        docker push yourusername/hello-world-node:latest
+        docker build -t prashanthdussa/hello-world-node-app:latest .
+        docker push prashanthdussa/hello-world-node-app:latest
 
   deploy:
     runs-on: ubuntu-latest
