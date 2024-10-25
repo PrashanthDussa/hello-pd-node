@@ -54,6 +54,11 @@ jobs:
           
           # Pull the latest Docker image from Docker Hub
           docker pull prashanthdussa/hello-world-node-app:latest
+
+          if [ "$(docker ps -q -f publish=3000)" ]; then
+            docker stop $(docker ps -q -f publish=3000)
+            docker rm $(docker ps -aq -f publish=3000)
+          fi
           
           # Check if the container exists and stop/remove it if it does
           if [ "$(docker ps -aq -f name=hello-world-node-app)" ]; then
